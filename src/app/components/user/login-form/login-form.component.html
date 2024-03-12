@@ -1,19 +1,54 @@
-<div class="card" style="width: 25rem;">
+<div class="card" style="width: 25rem">
   <div class="card-body">
-    <h1 class="card-title text-center mb-5 ">Login</h1>
+    <h1 class="card-title text-center mb-5">Login</h1>
+    <p class="text-danger" *ngIf="userExists">
+      Usuário não cadastrado no sistema
+    </p>
     <form>
       <div class="mb-4">
         <label for="email" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Digite o seu email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}">
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Digite o seu email"
+          [(ngModel)]="user.email"
+          [ngModelOptions]="{ standalone: true }"
+          (blur)="verifyEmail()"
+        />
+        <p class="text-danger" *ngIf="emailIsValid">
+          O email é obrigatório e deve estar no formato example&#64;email.com
+        </p>
       </div>
       <div class="mb-4">
         <label for="password" class="form-label">Senha:</label>
-        <input type="password" class="form-control" id="password" placeholder="Digite a sua senha" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}">
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Digite a sua senha"
+          [(ngModel)]="user.password"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <p class="text-danger" *ngIf="passwordIsValid">A senha é obrigatória</p>
       </div>
       <div class="mb-4">
         <p><a class="link-opacity-100-hover" href="#">Esqueceu a senha?</a></p>
       </div>
-      <button type="submit" class="btn btn-primary botao mt-4 mb-4" (click)="handleLogin($event)">FAZER LOGIN</button>
+      <button
+        type="submit"
+        class="btn btn-primary botao mt-4"
+        (click)="handleLogin($event)"
+      >
+        FAZER LOGIN
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary botao mt-2 mb-4"
+        (click)="createAccount($event)"
+      >
+        CRIAR CONTA
+      </button>
     </form>
   </div>
 </div>

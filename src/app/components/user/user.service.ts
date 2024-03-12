@@ -14,4 +14,8 @@ export class UserService {
   login(user: User): Observable<User[]> {
     return this.http.get<User[]>(this.apiURL);
   }
+
+  create(user: User): Observable<User> {
+    return this.http.post<User>(this.apiURL, user);
+  }
 }

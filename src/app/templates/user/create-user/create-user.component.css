@@ -1,0 +1,20 @@
+.container-create {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #656565;
+  background-position: center;
+  background-size: cover;
+}
+
+.voltar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.voltar a {
+  color: #fff;
+}

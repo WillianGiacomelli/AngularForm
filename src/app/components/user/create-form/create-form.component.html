@@ -1,0 +1,85 @@
+<div class="card" style="width: 25rem">
+  <div class="card-body">
+    <h1 class="card-title text-center mb-5">Criar Nova Conta</h1>
+
+    <form>
+      <div class="mb-4">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Digite o seu email"
+          [(ngModel)]="user.email"
+          [ngModelOptions]="{ standalone: true }"
+          (blur)="verifyEmail()"
+        />
+        <p class="text-danger" *ngIf="emailIsValid">
+          O email é obrigatório e deve estar no formato example&#64;email.com
+        </p>
+      </div>
+      <div class="mb-4">
+        <label for="emailConfirm" class="form-label"
+          >Confirmação de email</label
+        >
+        <input
+          type="email"
+          class="form-control"
+          id="emailConfirm"
+          placeholder="Digite o seu email novamente"
+          [(ngModel)]="emailConfirm"
+          [ngModelOptions]="{ standalone: true }"
+          (blur)="verifyEqualEmail()"
+        />
+        <p class="text-danger" *ngIf="emailIsNotEqual">
+          Os email são diferentes!
+        </p>
+      </div>
+      <div class="mb-4">
+        <label for="password" class="form-label">Senha</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Digite a sua senha"
+          [(ngModel)]="user.password"
+          [ngModelOptions]="{ standalone: true }"
+          (blur)="verifyPassword()"
+        />
+        <p class="text-danger" *ngIf="passwordIsValid">
+          A senha não corresponde aos requisitos!
+        </p>
+      </div>
+      <div class="mb-4">
+        <label for="passwordConfirm" class="form-label"
+          >Confirmação de Senha</label
+        >
+        <input
+          type="password"
+          class="form-control"
+          id="passwordConfirm"
+          placeholder="Digite a sua senha"
+          [(ngModel)]="passwordConfirm"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <p class="text-danger" *ngIf="passwordIsNotEqual">Senhas direntes!</p>
+      </div>
+      <p class="text-body-tertiary">
+        A senha deve ter entre 8 e 20 caracteres;
+      </p>
+      <p class="text-body-tertiary">Ao menos 1 letra miúscula</p>
+      <p class="text-body-tertiary">Ao menos 1 caracter especial</p>
+      <p class="text-danger" *ngIf="userAlreadyExist">
+        Usuário já cadastrado no sistema
+      </p>
+      <p class="text-danger" *ngIf="inputsEmpty">Preencha todos os campos</p>
+      <button
+        type="submit"
+        class="btn btn-primary botao mt-4"
+        (click)="handleCreate($event)"
+      >
+        CRIAR CONTA
+      </button>
+    </form>
+  </div>
+</div>
