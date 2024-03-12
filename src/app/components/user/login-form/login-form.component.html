@@ -1,0 +1,19 @@
+<div class="card" style="width: 25rem;">
+  <div class="card-body">
+    <h1 class="card-title text-center mb-5 ">Login</h1>
+    <form>
+      <div class="mb-4">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Digite o seu email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="mb-4">
+        <label for="password" class="form-label">Senha:</label>
+        <input type="password" class="form-control" id="password" placeholder="Digite a sua senha" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="mb-4">
+        <p><a class="link-opacity-100-hover" href="#">Esqueceu a senha?</a></p>
+      </div>
+      <button type="submit" class="btn btn-primary botao mt-4 mb-4" (click)="handleLogin($event)">FAZER LOGIN</button>
+    </form>
+  </div>
+</div>
