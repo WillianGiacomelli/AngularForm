@@ -1,9 +1,9 @@
 import { UserService } from './../user.service';
 import { Component } from '@angular/core';
 import { User } from '../User';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-form',
@@ -71,6 +71,7 @@ export class LoginFormComponent {
             u.email === this.user.email && u.password === this.user.password
         );
         if (user) {
+          window.localStorage.setItem('user', this.user.email);
           this.router.navigate(['/dashboard']);
         }
       });
