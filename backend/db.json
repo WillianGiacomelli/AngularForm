@@ -1,3 +1,9 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": 0,
+      "email": "willian2406@live.com",
+      "password": "@Senha123"
+    }
+  ]
 }
