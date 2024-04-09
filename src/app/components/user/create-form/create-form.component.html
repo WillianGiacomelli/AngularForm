@@ -1,8 +1,8 @@
-<div class="card" style="width: 25rem">
+<div class="card shadow-sm" style="width: 25rem">
   <div class="card-body">
     <h1 class="card-title text-center mb-5">Criar Nova Conta</h1>
 
-    <form>
+    <form [formGroup]="form">
       <div class="mb-4">
         <label for="email" class="form-label">Email</label>
         <input
@@ -10,11 +10,9 @@
           class="form-control"
           id="email"
           placeholder="Digite o seu email"
-          [(ngModel)]="user.email"
-          [ngModelOptions]="{ standalone: true }"
-          (blur)="verifyEmail()"
+          formControlName="email"
         />
-        <p class="text-danger" *ngIf="emailIsValid">
+        <p class="text-danger" *ngIf="form.get('email')?.errors && form.get('email')?.touched">
           O email é obrigatório e deve estar no formato example&#64;email.com
         </p>
       </div>
@@ -27,11 +25,9 @@
           class="form-control"
           id="emailConfirm"
           placeholder="Digite o seu email novamente"
-          [(ngModel)]="emailConfirm"
-          [ngModelOptions]="{ standalone: true }"
-          (blur)="verifyEqualEmail()"
+          formControlName="emailConfirm"
         />
-        <p class="text-danger" *ngIf="emailIsNotEqual">
+        <p class="text-danger" *ngIf="form.get('emailConfirm')?.errors?.['emailConfirmError']">
           Os email são diferentes!
         </p>
       </div>
@@ -42,11 +38,9 @@
           class="form-control"
           id="password"
           placeholder="Digite a sua senha"
-          [(ngModel)]="user.password"
-          [ngModelOptions]="{ standalone: true }"
-          (blur)="verifyPassword()"
+          formControlName="password"
         />
-        <p class="text-danger" *ngIf="passwordIsValid">
+        <p class="text-danger" *ngIf="form.get('password')?.errors?.['passwordInvalidError']">
           A senha não corresponde aos requisitos!
         </p>
       </div>
@@ -58,11 +52,9 @@
           type="password"
           class="form-control"
           id="passwordConfirm"
-          placeholder="Digite a sua senha"
-          [(ngModel)]="passwordConfirm"
-          [ngModelOptions]="{ standalone: true }"
+          formControlName="passwordConfirm"
         />
-        <p class="text-danger" *ngIf="passwordIsNotEqual">Senhas direntes!</p>
+        <p class="text-danger" *ngIf="form.get('passwordConfim')?.errors?.['passwordConfirmInvalidError']">Senhas direntes!</p>
       </div>
       <p class="text-body-tertiary">
         A senha deve ter entre 8 e 20 caracteres;
@@ -72,7 +64,7 @@
       <p class="text-danger" *ngIf="userAlreadyExist">
         Usuário já cadastrado no sistema
       </p>
-      <p class="text-danger" *ngIf="inputsEmpty">Preencha todos os campos</p>
+      <p class="text-danger" *ngIf="form.get('passwordConfim')?.errors?.['required']">Preencha todos os campos</p>
       <button
         type="submit"
         class="btn btn-primary botao mt-4"
