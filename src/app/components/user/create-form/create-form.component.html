@@ -1,75 +1,40 @@
-<div class="card shadow-sm" style="width: 25rem">
+<div class="card shadow-sm">
   <div class="card-body">
     <h1 class="card-title text-center mb-5">Criar Nova Conta</h1>
 
     <form [formGroup]="form">
       <div class="mb-4">
         <label for="email" class="form-label">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          placeholder="Digite o seu email"
-          formControlName="email"
-        />
+        <input type="email" class="form-control" id="email" placeholder="Digite o seu email" formControlName="email" />
         <p class="text-danger" *ngIf="form.get('email')?.errors && form.get('email')?.touched">
           O email é obrigatório e deve estar no formato example&#64;email.com
         </p>
       </div>
       <div class="mb-4">
-        <label for="emailConfirm" class="form-label"
-          >Confirmação de email</label
-        >
-        <input
-          type="email"
-          class="form-control"
-          id="emailConfirm"
-          placeholder="Digite o seu email novamente"
-          formControlName="emailConfirm"
-        />
-        <p class="text-danger" *ngIf="form.get('emailConfirm')?.errors?.['emailConfirmError']">
-          Os email são diferentes!
-        </p>
+        <label for="emailConfirm" class="form-label">Confirmação de email</label>
+        <input type="email" (blur)="validateConfirmEmail()" class="form-control" id="emailConfirm" placeholder="Digite o seu email novamente" formControlName="emailConfirm" />
+        <p class="text-danger" *ngIf="form.get('emailConfirm')?.errors?.['emailConfirmIsNotTheSame'] && form.get('emailConfirm')?.touched">Os emails são direntes!</p>
       </div>
-      <div class="mb-4">
+      <div class=" mb-4">
         <label for="password" class="form-label">Senha</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          placeholder="Digite a sua senha"
-          formControlName="password"
-        />
-        <p class="text-danger" *ngIf="form.get('password')?.errors?.['passwordInvalidError']">
+        <input type="password" class="form-control" id="password" placeholder="Digite a sua senha" formControlName="password" />
+        <p class="text-danger" *ngIf="form.get('password')?.errors?.['passwordFormatError'] && form.get('password')?.touched">
           A senha não corresponde aos requisitos!
         </p>
       </div>
       <div class="mb-4">
-        <label for="passwordConfirm" class="form-label"
-          >Confirmação de Senha</label
-        >
-        <input
-          type="password"
-          class="form-control"
-          id="passwordConfirm"
-          formControlName="passwordConfirm"
-        />
-        <p class="text-danger" *ngIf="form.get('passwordConfim')?.errors?.['passwordConfirmInvalidError']">Senhas direntes!</p>
+        <label for="passwordConfirm" class="form-label">Confirmação de Senha</label>
+        <input type="password" class="form-control" id="passwordConfirm" formControlName="passwordConfirm" (blur)="validateConfirmPassword()" placeholder="Digite a confirmação da sua senha" />
+        <p class="text-danger" *ngIf="form.get('passwordConfirm')?.errors?.['passwordConfirmIsNotTheSame'] && form.get('passwordConfirm')?.touched">Senhas direntes!</p>
       </div>
-      <p class="text-body-tertiary">
-        A senha deve ter entre 8 e 20 caracteres;
-      </p>
+      <p class="text-body-tertiary">A senha deve ter entre 8 e 20 caracteres</p>
       <p class="text-body-tertiary">Ao menos 1 letra miúscula</p>
       <p class="text-body-tertiary">Ao menos 1 caracter especial</p>
       <p class="text-danger" *ngIf="userAlreadyExist">
         Usuário já cadastrado no sistema
       </p>
       <p class="text-danger" *ngIf="form.get('passwordConfim')?.errors?.['required']">Preencha todos os campos</p>
-      <button
-        type="submit"
-        class="btn btn-primary botao mt-4"
-        (click)="handleCreate($event)"
-      >
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary botao mt-4" (click)="handleCreate($event)">
         CRIAR CONTA
       </button>
     </form>

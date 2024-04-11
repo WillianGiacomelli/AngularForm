@@ -8,4 +8,19 @@
 
 .card {
   margin: 50px 0;
+  width: 450px;
+}
+
+.text-danger {
+  font-size: 0.7rem;
+}
+
+.text-body-tertiary {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 500px) {
+  .card {
+    width: 250px;
+  }
 }
