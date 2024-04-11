@@ -34,7 +34,7 @@
         Usuário já cadastrado no sistema
       </p>
       <p class="text-danger" *ngIf="form.get('passwordConfim')?.errors?.['required']">Preencha todos os campos</p>
-      <button type="submit" [disabled]="!form.valid" class="btn btn-primary botao mt-4" (click)="handleCreate($event)">
+      <button type="submit" [disabled]="form.valid" class="btn btn-primary botao mt-4" (click)="handleCreate($event)">
         CRIAR CONTA
       </button>
     </form>

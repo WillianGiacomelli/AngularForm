@@ -51,11 +51,11 @@ export class CreateFormComponent implements OnInit {
   }
 
   public validateConfirmPassword(): void {
-    console.log(this.form.value.password, this.form.value.passwordConfirm);
     if (this.form.value.password == this.form.value.passwordConfirm) {
       this.form
         .get('passwordConfirm')
         ?.setErrors({ passwordConfirmIsNotTheSame: false });
+        return;
     }
     this.form
       .get('passwordConfirm')
@@ -63,11 +63,11 @@ export class CreateFormComponent implements OnInit {
   }
 
   public validateConfirmEmail(): void {
-    console.log(this.form.value.password, this.form.value.emailConfirm);
-    if (this.form.value.password == this.form.value.emailConfirm) {
+    if (this.form.value.email == this.form.value.emailConfirm) {
       this.form
         .get('emailConfirm')
         ?.setErrors({ emailConfirmIsNotTheSame: false });
+        return;
     }
     this.form
       .get('emailConfirm')
@@ -75,6 +75,7 @@ export class CreateFormComponent implements OnInit {
   }
 
   public handleCreate(e: any): void {
+    console.log(this.form);
     e.preventDefault();
     this.userService.login(this.form.value).subscribe((users) => {
       const userExistsSytems = users.find(
