@@ -1,5 +1,5 @@
 import { UserService } from './../user.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css',
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   user: User = {
     id: 0,
     email: '',
@@ -24,6 +24,8 @@ export class LoginFormComponent {
   userExists: boolean = false;
 
   constructor(private userService: UserService, private router: Router) {}
+
+  ngOnInit(): void {}
 
   isValidEmail(email: string): boolean {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -58,7 +60,6 @@ export class LoginFormComponent {
     e.preventDefault();
     let email = this.verifyEmail();
     let password = this.verifyPassword();
-    console.log(email, password);
     if (email && password) {
       this.userService.login(this.user).subscribe((users) => {
         const userExistsSytems = users.find((u) => u.email === this.user.email);
@@ -80,6 +81,6 @@ export class LoginFormComponent {
 
   createAccount(e: any) {
     e.preventDefault();
-    this.router.navigate(['/create']);
+    this.router.navigate(['/user/create']);
   }
 }

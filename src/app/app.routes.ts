@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './templates/login/login.component';
+import { LoginComponent } from './templates/user/login/login.component';
 import { CreateUserComponent } from './templates/user/create-user/create-user.component';
-import { DashboardComponent } from './templates/user/dashboard/dashboard.component';
+import { DashboardComponent } from './templates/dashboard/dashboard.component';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'create', component: CreateUserComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: 'user', pathMatch: 'full' },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+  },
 ];
